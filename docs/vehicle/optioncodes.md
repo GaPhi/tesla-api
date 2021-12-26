@@ -76,13 +76,13 @@ return a generic set of codes related to a Model 3.
 | BR05   | Battery Firmware Limit (75kWh)                           |                                                           |
 | BS00   | Blind Spot Sensor Package                                |                                                           |
 | BS01   | Special Production Flag                                  |                                                           |
-| BT35   | 50 kWh (Model 3/Y) Pre 2021 Panasonic cells              | Model 3 Standart Range                                    |
+| BT35   | 50 kWh (Model 3/Y) Pre 2021 Panasonic cells              | Model 3 Standard Range                                    |
 | BT36   | 62.5 kWh (Model 3/Y) Pre 2021 Panasonic cells            | Model 3 Mid Range                                         |
 | BT37   | 75 kWh (Model 3/Y) Pre 2021 Panasonic cells              | 2017-03.2021 LR+P Model 3/Y (Mostly Fremont build)        |
 | BT38   | 74 kWh (Model 3/Y) LG cells                              | M3/MY LR/Dual build in China                              |
 | BT40   | 40 kWh                                                   |                                                           |
 | BT41   | 55? kWh 2021 Panasonic?                                  | M3 Standard+ 2021 model year                              |
-| BT42   | 82 kWh (Model 3/Y) 2021 Panasonic                        | M3P (and latest LR) 2021 model year                       |
+| BT42   | 82 kWh (Model 3/Y) 2021 Panasonic                        | M3P (and latest LR Fremont) 2021 model year               |
 | BT43   | 79 kWh (Model 3/Y) 2021 LG NCA                           | M3/Y LR Q4.2021                                           |
 | BT60   | 60 kWh                                                   |                                                           |
 | BT70   | 70 kWh                                                   |                                                           |
@@ -96,7 +96,7 @@ return a generic set of codes related to a Model 3.
 | BTX8   | 75 kWh                                                   |                                                           |
 | BTX9   | 100 kWh Battery Pack with Weight Reduction               | Model S 2020/08                                           |
 | BTXA   | 18650J2 Battery Cell                                     | Model X 2020                                              |
-| BTXB   | Plaid _E6_ vin battery                                   | Model S 2021                                              |
+| BTXB   | 99kWh 18650 Plaid _E5 or E6_ vin battery                 | Model S 2021 LR/Plaid                                     |
 | BY00   |                                                          | Model Y                                                   |
 | BY01   |                                                          | Model Y                                                   |
 | CC01   | Five Seat Interior                                       |                                                           |
@@ -113,8 +113,10 @@ return a generic set of codes related to a Model 3.
 | CH05   | 48 Amp Charger (Model S/X)                               |                                                           |
 | CH07   | 48 Amp Charger (Model 3)                                 |                                                           |
 | CH09   | Tesla Standard Charging System (Model S 2020 EU)         |                                                           |
-| CH12   | 48 Amperage Combo 1 Gen 3.5 Charger (MS/MX 2020-2021)    | Chargers Single Phase                                     |
-| CH15   | 48 Amp Charger Hardware (REEU/REAP) with Busbar          | (EU spec?)                                                |
+| CH11   | Single phase 48 Amperage Combo 1                         | Chargers Single Phase                                     |
+| CH12   | 48 Amperage Combo 1 Gen 3.5 Charger                      | Chargers Single Phase (MS/MX 2020-2021)                   |
+| CH15   | 48 Amp Charger Hardware (REEU/REAP) with Busbar          | EU spec                                                   |
+| CH16   | 48 Amp Charger Hardware (RENA) with Busbar               | NA spec                                                   |
 | COL0   | Signature                                                |                                                           |
 | COL1   | Solid                                                    |                                                           |
 | COL2   | Metallic                                                 |                                                           |
@@ -139,15 +141,15 @@ return a generic set of codes related to a Model 3.
 | COPT   | Country: Portugal                                        |                                                           |
 | COSE   | Country: Sweden                                          |                                                           |
 | COUS   | Country: United States                                   |                                                           |
-| CPF0   | Standard Connectivity                                    |                                                           |
-| CPF1   | Premium Connectivity                                     |                                                           |
+| CPF0   | Standard Connectivity                                    | 1 month                                                   |
+| CPF1   | Premium Connectivity                                     | 1 year                                                    |
 | CPW1   | 20" Performance Wheels                                   |                                                           |
 | CW00   | No Weather Package                                       | No Cold Weather Package                                   |
 | CW02   | Weather Package                                          | Subzero Weather Package                                   |
 | DA00   | No Autopilot                                             |                                                           |
 | DA01   | Active Safety (ACC,LDW,SA)                               | Drivers Assistance Package                                |
 | DA02   | Autopilot Convenience Features                           |                                                           |
-| DCF0   | Autopilot Convenience Features                           |                                                           |
+| DCF0   | Front Console NO Drop-In Front Console                   |                                                           |
 | DCF2   | Front Console Inductive Phone Charger                    |                                                           |
 | DRLH   | Left Hand Drive                                          |                                                           |
 | BC3R   | Performance Brakes                                       | Model 3                                                   |
@@ -165,9 +167,10 @@ return a generic set of codes related to a Model 3.
 | FC01   | Front Console Inductive Phone Charger                    | Model 3                                                   |
 | FC02   | Front Console Front Console (Premium)                    | Model 3/Y 2021                                            |
 | FC3P   | Front Console Front Console (Premium)                    | Model 3                                                   |
-| FD00   |                                                          | Model 3 2021                                              |
-| FD01   |                                                          | Model Y 2021 (China?)                                     |
-| FD03   |                                                          | Model S/X 2021                                            |
+| FD00   |                                                          | Model 3 2021 (USA)                                        |
+| FD01   |                                                          | Model 3/Y 2021 (China)                                    |
+| FD02   |                                                          | Model S/X 2021 LR                                         |
+| FD03   |                                                          | Model S/X 2021 P                                          |
 | FDU2   | Raven Front Drive Unit                                   | Model S/X 2020-2021                                       |
 | FG3B   | Fog Lamp Cover (No Fog lamps)                            | Model 3 Standard+                                         |
 | FG00   | No Exterior Lighting Package                             |                                                           |
@@ -200,14 +203,18 @@ return a generic set of codes related to a Model 3.
 | HP01   | HPWC Ordered                                             |                                                           |
 | HP30   | No heat pump assembly                                    | Model 3 Standard+ China made                              |
 | HP31   | Heat pump assembly                                       | Model 3                                                   |
-| I38M   | Rear Drive Unit Inverter 800A Mosfet                     | Model 3                                                   |
+| I36M   | Rear Drive Unit Inverter 600A Mosfet                     | Model 3 DM/LR                                             |
+| I38M   | Rear Drive Unit Inverter 800A Mosfet                     | Model 3 Std+, Performance                                 |
 | IBB0   | All Black Interior                                       | Model 3 Old Door Trim                                     |
 | IBB1   | All Black Interior                                       | Model 3 New Door Trim (Since Q1 2021)                     |
 | IC00   |                                                          | Model S/X (Since Q2 2021)                                 |
+| IC02   |                                                          | Model S/X (Since Q2 2021)                                 |
 | ID00   |                                                          | Model S/X (Since Q2 2021)                                 |
+| ID03   |                                                          | Model S/X (Since Q2 2021)                                 |
+| ID3A   | Interior White Aluminum                                  | Model 3/Y                                                 |
 | ID3W   | Interior Wood Decor                                      | Model 3/Y                                                 |
 | IDBA   | Dark Ash Wood Decor                                      |                                                           |
-| IDBO   | Figured Ash Wood Decor                                   |                                                           |
+| IDBO   | Figured Ash Wood Decor Burl Open Pore décor              |                                                           |
 | IDCF   | Carbon Fiber Decor                                       |                                                           |
 | IDHM   | Matte Obeche Wood Decor                                  |                                                           |
 | IDOK   | Oak Decor                                                |                                                           |
@@ -261,7 +268,8 @@ return a generic set of codes related to a Model 3.
 | LLP2   | License Plate Liftgate Type EU Liftgate                  |                                                           |
 | LP00   | Lighting Package                                         | No Lighting Package                                       |
 | LP01   | Lighting Package                                         | Premium Interior Lighting                                 |
-| LS01   |                                                          | Latest 2021 Model 3/Y                                     |
+| LS01   |                                                          | Latest 2021 Model 3/Y Perf                                |
+| LS02   |                                                          | Latest 2021 Model 3/Y DM                                  |
 | LT00   | Vegan interior                                           |                                                           |
 | LT01   | Standard interior                                        |                                                           |
 | LT03   |                                                          | Latest 2021 Model 3/Y Interiror?                          |
@@ -409,9 +417,11 @@ return a generic set of codes related to a Model 3.
 | RBMR   | Rear Brake Mando Red                                     | Model S                                                   |
 | RCX0   | No Rear Console                                          |                                                           |
 | RCX1   | Rear Console                                             |                                                           |
-| RD02   |                                                          | Model 3                                                   |
-| RD04   |                                                          | Model S/X 2021 (Rear display?)                            |
-| RD05   | Drive Unit?                                              | Model Y (AWD China?)                                      |
+| RD01   | Rear drive unit (600A)                                   | Model 3 LR/DM (Fremont)                                   |
+| RD02   | Rear drive unit (800A)                                   | Model 3 Std+, Perf                                        |
+| RD03   |                                                          | Model S/X 2021 LR (Rear drive unit)                       |
+| RD04   |                                                          | Model S/X 2021 P (Rear drive unit)                        |
+| RD05   | Drive Unit                                               | Model 3/Y LR/DM (China)                                   |
 | RD06   |                                                          | Model 3 2022 refresh?                                     |
 | RDU2   | Rear large drive unit with elec. oil pump(stator <5kg)   | Model S/X 2020 (Perf version)                             |
 | RDU4   | Rear small drive unit with elec. oil pump(stator <5kg)   | Model S/X 2020 (Plus version)                             |
@@ -425,7 +435,7 @@ return a generic set of codes related to a Model 3.
 | RFPX   | Glass Roof                                               | Model X                                                   |
 | RNG0   | Standard Battery Range                                   | Model 3 Standard+                                         |
 | RL00   |                                                          | Model S/X 2021                                            |
-| RL31   |                                                          | Model 3                                                   |
+| RL31   |                                                          | Model 3 Perf                                              |
 | RL32   |                                                          | Model 3/Y (AWD)                                           |
 | RS3H   | Second Row Seat Rear Seats (Heated)                      | Model 3/Y with Premium Interior                           |
 | RSF0   | Rear Heated Seats Disabled                               | Model 3/Y without Premium Interior                        |
@@ -442,6 +452,7 @@ return a generic set of codes related to a Model 3.
 | S32W   | S32W                                                     |                                                           |
 | S3PB   | Seat Black PUR Premium Seats                             |                                                           |
 | S3PW   | Seat White PUR Premium Seats                             |                                                           |
+| S42P   | Seat Black Plenum Seats                                  |                                                           |
 | S42W   | Seat White Plenum Seats                                  |                                                           |
 | SA3P   | Seat Adjustment - Power                                  | Model 3/Y                                                 |
 | SC00   | No Supercharging                                         |                                                           |
@@ -464,7 +475,7 @@ return a generic set of codes related to a Model 3.
 | ST30   | Base Steering Wheel                                      | Model 3 Standard+                                         |
 | ST02   | Heated Leather Steering Wheel                            |                                                           |
 | ST03   | Regular Steering Wheel                                   | Model X/S Plaid (removed)                                 |
-| ST0Y   | Yoke Steering Wheel.                                     | Model X/S Plaid                                           |
+| ST0Y   | Yoke Steering Wheel                                      | Model X/S Plaid                                           |
 | ST31   | Steering Wheel                                           | Premium Steering Wheel                                    |
 | ST33   | Steering wheel - heated on LR/P (Model 3)                | Premium Steering Wheel                                    |
 | STCP   | Steering Wheel                                           | Steering Column (Power)                                   |
@@ -475,13 +486,16 @@ return a generic set of codes related to a Model 3.
 | SU01   | Smart Air Suspension                                     |                                                           |
 | SU03   | Suspension Update                                        | Model S/X 2020-2021                                       |
 | SU3C   | Coil Spring Suspension                                   |                                                           |
+| SWF0   |                                                          | Model 3/Y                                                 |
 | SWF1   |                                                          | Model 3/Y                                                 |
-| T3MA   | Tires M3                                                 | 18" Michelin All Season, Square                           |
 | T3HS   | Tires M3                                                 | 19" Hankook Summer Square                                 |
-| T3P3   | Tires M3                                                 | 20" Michelin PS4                                          |
+| T3MA   | Tires M3                                                 | 18" Michelin All Season, Square                           |
+| T3MC   | Tires M3                                                 | 18" China made                                            |
+| T3P3   | Tires M3                                                 | 20" Michelin PS4 Summer                                   |
 | TD00   | Tear Down NON-GLIDER                                     | Model S/X                                                 |
 | TIC4   | Tires MX                                                 | 20" all-weather tires                                     |
 | TIG2   | Summer Tires                                             |                                                           |
+| TIG5   | Goodyear Eagle Touring                                   |                                                           |
 | TIM7   | Summer Tires                                             |                                                           |
 | TIM8   | Michelin PS4S                                            |                                                           |
 | TIM9   | Michelin Pilot Sport 4                                   |                                                           |
@@ -519,6 +533,7 @@ return a generic set of codes related to a Model 3.
 | W33D   | 20" Black Performance Wheels 2021                        | Model 3                                                   |
 | W38B   | 18" Aero Wheels                                          | For the Model 3 and Model Y                               |
 | W39B   | 19" Sport Wheels                                         |                                                           |
+| W40B   | 18" Wheels                                               | Model 3 2021                                              |
 | WR00   | No Wrap                                                  |                                                           |
 | WR01   | Wrap                                                     |                                                           |
 | WR02   | Wrap 2 (Tilburg bound)                                   |                                                           |
@@ -529,6 +544,7 @@ return a generic set of codes related to a Model 3.
 | WT22   | 22" Silver Turbine Wheels                                |                                                           |
 | WTAB   | 21" Black Arachnid Wheels                                |                                                           |
 | WTAS   | 19" Silver Slipstream Wheels                             |                                                           |
+| WTD2   | 19" Sonic Carbon Slipstream Wheels (8.5 in)              |                                                           |
 | WTDS   | 19" Grey Slipstream Wheels                               |                                                           |
 | WTNN   | 20" Nokian Winter Tires (non-studded)                    |                                                           |
 | WTNS   | 20" Nokian Winter Tires (studded)                        |                                                           |
