@@ -5,7 +5,10 @@
 ## API Basics
 
 - [Authentication](api-basics/authentication.md)
+- [Users](api-basics/users.md)
 - [Vehicles](api-basics/vehicles.md)
+- [Energy Products](api-basics/products.md)
+- [Trip Planner](api-basics/tripplan.md)
 
 ## Vehicle
 
@@ -19,6 +22,7 @@
   - [Vehicle Config](vehicle/state/vehicleconfig.md)
   - [Mobile Enabled](vehicle/state/mobileenabled.md)
   - [Nearby Charging Sites](vehicle/state/nearbychargingsites.md)
+  - [Miscellaneous](vehicle/state/misc.md)
 - [Commands](vehicle/commands/README.md)
   - [Wake](vehicle/commands/wake.md)
   - [Alerts](vehicle/commands/alerts.md)
@@ -37,9 +41,17 @@
   - [Sharing](vehicle/commands/sharing.md)
   - [Software Updates](vehicle/commands/softwareupdate.md)
   - [Calendar](vehicle/commands/calendar.md)
+  - [Miscellaneous](vehicle/commands/misc.md)
 - [Streaming](vehicle/streaming.md)
 - [Autopark/Summon](vehicle/autopark.md)
 - [Option Codes](vehicle/optioncodes.md)
+
+## Energy Products
+
+- [Overview](energy/README.md)
+  - [History](energy/history.md)
+  - [State](energy/state.md)
+  - [Commands](energy/commands.md)
 
 ## Miscellaneous
 

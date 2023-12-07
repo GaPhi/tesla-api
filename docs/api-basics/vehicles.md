@@ -12,11 +12,18 @@ One potentially confusing part of Tesla's API is the switching use of the `id` a
 
 For the state and command APIs, you should be using the `id` field. If your JSON parser doesn't support large numbers (&gt;32 bit), then you can use the `id_s` field for a string version of the ID.
 
-## GET `/api/1/vehicles`
+## GET `/api/1/vehicles?page={page}`
 
 Retrieve a list of your owned vehicles.
 
+The list is limited to a maximum of 100 entries. Use the `page` GET parameter to iterate over the response page and use
+the response `count` variable to determine if another request should be made.
+
 ### Request parameters
+
+| Field  | Example | Description     | Required | Default |
+| :----- | :------ | :-------------- | :------- | :------ |
+| `page` | `1`     | The page number | no       | 1       |
 
 ### Response
 
@@ -28,7 +35,6 @@ Retrieve a list of your owned vehicles.
       "vehicle_id": 1234567890,
       "vin": "5YJSA11111111111",
       "display_name": "Nikola 2.0",
-      "option_codes": "MDLS,RENA,AF02,APF1,APH2,APPB,AU01,BC0R,BP00,BR00,BS00,CDM0,CH05,PBCW,CW00,DCF0,DRLH,DSH7,DV4W,FG02,FR04,HP00,IDBA,IX01,LP01,ME02,MI01,PF01,PI01,PK00,PS01,PX00,PX4D,QTVB,RFP2,SC01,SP00,SR01,SU01,TM00,TP03,TR00,UTAB,WTAS,X001,X003,X007,X011,X013,X021,X024,X027,X028,X031,X037,X040,X044,YFFC,COUS",
       "color": null,
       "tokens": ["abcdef1234567890", "1234567890abcdef"],
       "state": "online",
@@ -63,7 +69,6 @@ These resources are read-only and determine the state of the vehicle's various s
     "vehicle_id": 1234567890,
     "vin": "5YJSA11111111111",
     "display_name": "Nikola 2.0",
-    "option_codes": "MDLS,RENA,AF02,APF1,APH2,APPB,AU01,BC0R,BP00,BR00,BS00,CDM0,CH05,PBCW,CW00,DCF0,DRLH,DSH7,DV4W,FG02,FR04,HP00,IDBA,IX01,LP01,ME02,MI01,PF01,PI01,PK00,PS01,PX00,PX4D,QTVB,RFP2,SC01,SP00,SR01,SU01,TM00,TP03,TR00,UTAB,WTAS,X001,X003,X007,X011,X013,X021,X024,X027,X028,X031,X037,X040,X044,YFFC,COUS",
     "color": null,
     "tokens": ["abcdef1234567890", "1234567890abcdef"],
     "state": "online",

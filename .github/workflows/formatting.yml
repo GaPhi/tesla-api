@@ -16,9 +16,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Check formatting
-        uses: actionsx/prettier@v2
+        uses: creyD/prettier_action@v4.3
         with:
-            args: --check docs
+          prettier_options: --check docs

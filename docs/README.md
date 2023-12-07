@@ -8,6 +8,9 @@ If you want to use Tesla's Bluetooth Low Energy (BLE) protocol to communicate wi
 
 The base URI for all requests is `https://owner-api.teslamotors.com/` (except for the Streaming and Autopark APIs)
 
+> If you are in China, the URI for requests is going to be `owner-api.vn.cloud.tesla.cn` for you. <br/>
+> Keep in mind to replace all `auth.tesla.com` URLs to `auth.tesla.cn` as well.
+
 _All requests require a_ `User-Agent` _header with any value provided._ For Tesla's sake, it's recommended you identify your application in some way using this header.
 
 ## API Organization
@@ -24,4 +27,4 @@ Streams in data about the car's telemetry at up to half second increments. The u
 
 ### Autopark ("Summon")
 
-A streaming command mode to control the automatic parking of HW1 (Autopilot v1) and HW2/HW2.5 (Autopilot v2) cars. This API uses a standard WebSocket that exchanges JSON objects to convey state information and issue commands during the Autopark session.
+A streaming command mode to control the automatic parking of HW1 (older Autopilot-only) and HW2/3 (FSD-capable) cars. This API uses a standard WebSocket that exchanges JSON objects to convey state information and issue commands during the Autopark session.

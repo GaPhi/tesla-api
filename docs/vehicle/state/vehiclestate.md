@@ -1,5 +1,9 @@
 # Vehicle State
 
+{% hint style='warning' %}
+This endpoint was deprecated and returns 404.
+{% endhint %}
+
 ## GET `/api/1/vehicles/{id}/data_request/vehicle_state`
 
 Returns the vehicle's physical state, such as which doors are open.
@@ -81,6 +85,10 @@ Here are the descriptions for the shorthand fields:
     "sun_roof_percent_open": 0,
     "sun_roof_state": "closed",
     "timestamp": 1604977470379,
+    "tpms_pressure_fl": 0.0,
+    "tpms_pressure_fr": 0.0,
+    "tpms_pressure_rl": 0.0,
+    "tpms_pressure_rr": 0.0,
     "valet_mode": false,
     "valet_pin_needed": true,
     "vehicle_name": "Nikola 2.0"

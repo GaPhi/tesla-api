@@ -4,14 +4,10 @@ description: The authentication process for the Tesla API
 
 # Authentication
 
-> ## ⚠ This is a work in progress ⚠
->
-> Tesla has deprecated the `/oauth/token` endpoint in favor of using `auth.tesla.com`. I'm working on updating the documentation as soon as possible. This documentation is still missing handling for MFA users. Feel free to discuss this in [issue #260](https://github.com/timdorr/tesla-api/issues/260).
-
 Tesla uses a separate SSO service (auth.tesla.com) for authentication across their app and website. This service is designed around a browser-based flow using OAuth 2.0, but also appears to have support for Open ID Connect. This supports both obtaining an access token and refreshing it as it expires.
 
 {% hint style="warning" %}
-Tesla's SSO service has a WAF (web application firewall) that may temporarily block you if you make repeated, execessive requests. This is to prevent bots from attacking the service, either as a brute force or denial-of-service attack. This normally presents as a "challenge" page, which requires running some non-trivial JavaScript code to validate that you have a full browser engine available. While you can potentially fully evaluate this page to remove the block, the best practice for now is to reduce your calls to the SSO service to a minimum and avoid things like automatic request retries.
+Tesla's SSO service has a WAF (web application firewall) that may temporarily block you if you make repeated, execessive requests. This is to prevent bots from attacking the service, either as a brute force or denial-of-service attack. This normally presents as a "challenge" page, which requires running some non-trivial JavaScript code to validate that you have a full browser engine available. While you can potentially fully evaluate this page to remove the block, the best practice for now is to reduce your calls to the SSO service to a minimum and avoid things like automatic request retries. The service also expects TLS 1.2 or lower connections, so avoid connecting with TLS 1.3.
 {% endhint %}
 
 ## Logging in
@@ -106,7 +102,7 @@ This is a standard [OAuth 2.0 Authorization Code exchange](https://oauth.net/2/g
 
 | Field           | Type             | Example                                | Description                                                     |
 | :-------------- | :--------------- | :------------------------------------- | :-------------------------------------------------------------- |
-| `grant_type`    | String, required | `authorization_code`                   | TThe type of OAuth grant. Always "authorization_code"           |
+| `grant_type`    | String, required | `authorization_code`                   | The type of OAuth grant. Always "authorization_code"            |
 | `client_id`     | String, required | `ownerapi`                             | The OAuth client ID. Always "ownerapi"                          |
 | `code`          | String, required | `123`                                  | The authorization code from the last request.                   |
 | `code_verifier` | String, required | `123`                                  | The code verifier string generated previously.                  |
@@ -124,6 +120,8 @@ This is a standard [OAuth 2.0 Authorization Code exchange](https://oauth.net/2/g
 
 ##### Response
 
+The response varies. If the user has no MFA enabled, the response will be:
+
 ```json
 {
   "access_token": "eyJaccess",
@@ -134,69 +132,55 @@ This is a standard [OAuth 2.0 Authorization Code exchange](https://oauth.net/2/g
 }
 ```
 
-### Step 4: Exchange bearer token for access token
+However, if the user has MFA enabled the response will be an HTML document with a `passcode` field inside it. This is for the TOTP (Time-based-One-time Password).
 
-#### POST `https://owner-api.teslamotors.com/oauth/token`
+To authenticate, you first need to get the list of known factors on the account, by requesting the `/authorize/mfa/factors` endpoint via GET. You also need to supply the `transaction_id` from the `/authorize` endpoint with this request.
 
-This endpoint follows [RFC 7523](https://tools.ietf.org/html/rfc7523) to exchange a JWT access token from the SSO service for an access token usable by the Owner API.
-
-The current client ID and secret are [available here](https://pastebin.com/pS7Z6yyP).
-
-You will get back an `access_token` which is treated as [an OAuth 2.0 Bearer Token](https://oauth.net/2/bearer-tokens/). This token is passed along in an `Authorization` header with all future requests:
-
-```http
-Authorization: Bearer {access_token}
-```
-
-The access token has a 45 day expiration.
-
-##### Request parameters
-
-> Important: Ensure you are using the `access_token` from the SSO service here. The returned access_token is for all other requests to the Owner API.
-
-```http
-Authorization: Bearer {access_token}
-```
-
-| Field           | Type             | Example                                       | Description                                                                   |
-| :-------------- | :--------------- | :-------------------------------------------- | :---------------------------------------------------------------------------- |
-| `grant_type`    | String, required | `urn:ietf:params:oauth:grant-type:jwt-bearer` | The type of OAuth grant. Always "urn:ietf:params:oauth:grant-type:jwt-bearer" |
-| `client_id`     | String, required | `abc`                                         | The OAuth client ID                                                           |
-| `client_secret` | String, required | `123`                                         | The OAuth client secret                                                       |
-
-##### Request
+| Field            |       Type       | Description                                        |
+| :--------------- | :--------------: | -------------------------------------------------- |
+| `transaction_id` | String, required | The transaction id from the `/authorize` endpoint. |
 
 ```json
 {
-  "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
-  "client_id": "abc",
-  "client_secret": "123"
+  "transaction_id": "transaction_id"
 }
 ```
 
-##### Response
+After doing this you need to send a POST request to the `/authorize/mfa/verify` endpoint with the `transaction_id`, `factor_id` and the current TOTP `passcode`. Similar to step 1, you also need to pass an additional `_csrf` field to the `/authorize/mfa/verify` endpoint. However, this is a different one from the first request, and has to fetched and parsed from the response of the `/authorize` endpoint that you hit earlier (the same response that had a `passcode` field inside of it).
+
+| Field            |       Type       | Description                                                        |
+| :--------------- | :--------------: | ------------------------------------------------------------------ |
+| `transaction_id` | String, required | The previously used transaction id from the `/authorize` endpoint. |
+| `factor_id`      | String, required | The factor id from the `/authorize/mfa/factors` endpoint.          |
+| `passcode`       | String, required | The current TOTP passcode.                                         |
+| `_csrf`          | String, required | The csrf parsed from response of `/authorize`                      |
 
 ```json
 {
-  "access_token": "abc123",
-  "token_type": "bearer",
-  "expires_in": 3888000,
-  "refresh_token": "cba321",
-  "created_at": 1538359034
+  "transaction_id": "transaction_id",
+  "factor_id": "factor_id",
+  "passcode": "passcode",
+  "_csrf": "csrf"
 }
+```
+
+This will validate the current `transaction_id` and allow for the previous request to POST successfully with the `transaction_id` as a form body parameter.
+
+## Making requests
+
+Requests are made using the `access_token` provided with the response. It is treated as an [OAuth 2.0 Bearer Token](https://oauth.net/2/bearer-tokens/) and expires every eight hours. This token is passed along in an Authorization header with all future requests:
+
+```http
+Authorization: Bearer {access_token}
 ```
 
 ## Refreshing an access token
 
 #### POST `https://auth.tesla.com/oauth2/v3/token`
 
-This uses the SSO `refresh_token` from Step 3 above to do an [OAuth 2.0 Refresh Token Grant](https://oauth.net/2/grant-types/refresh-token/). _This does not work with the `refresh_token` provided by the Owner API._ Those have no use currently and should be discarded.
-
-This refreshed access token can be used with the Owner API to obtain a new access token for that service using the exact same request as Step 4 above.
+This uses the SSO `refresh_token` from Step 3 above to do an [OAuth 2.0 Refresh Token Grant](https://oauth.net/2/grant-types/refresh-token/). The refreshed access token is to be used directly with the Owner API as a bearer token as per the above _Making requests_ section.
 
 This endpoint uses JSON for the request and response bodies.
-
-Should your Owner API token begin with `cn-` you should POST to `auth.tesla.cn` Tesla SSO service to have it refresh. Owner API tokens starting with `qts-` are to be refreshed using `auth.tesla.com`
 
 ##### Request parameters
 
